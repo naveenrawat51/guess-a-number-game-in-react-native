@@ -1,13 +1,20 @@
 import React from "react";
-import { StyleSheet, View, Text, Button } from "react-native";
+import { StyleSheet, View, Text, Button, Image } from "react-native";
+
+import BodyText from "../components/BodyText";
 
 export default function GameOverScreen({ roundNumber, yourNumber, onRestart }) {
   return (
     <View style={styles.screen}>
-      <Text>The Game is Over!!</Text>
-      <Text>Number of Rounds: {roundNumber}</Text>
-      <Text>Your Number: {yourNumber}</Text>
-      <Button title="NEW GAME" onPress={onRestart} />
+      <BodyText>You Won!!</BodyText>
+      <Image
+        source={require("../assets/success.png")}
+        style={styles.image}
+        resizeMode="cover"
+      />
+      <BodyText>Number of Rounds: {roundNumber}</BodyText>
+      <BodyText>Your Number: {yourNumber}</BodyText>
+      <Button title="START NEW GAME" onPress={onRestart} />
     </View>
   );
 }
@@ -17,5 +24,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  image: {
+    width: "60%",
+    height: 300,
+    marginBottom: 10,
   },
 });
