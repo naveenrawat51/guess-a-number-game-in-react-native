@@ -12,7 +12,8 @@ export default function Input(props) {
             placeholder="Number"
             autoCorrect={false}
             keyboardType="numeric"
-            maxLength={2}/>
+            maxLength={2}
+            />
     )
 }
 
