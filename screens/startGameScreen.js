@@ -59,7 +59,6 @@ export default function StartGameScreen({ onStartGame }) {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.screen}>
-        <Text style={styles.title}>Start a New App</Text>
         <Card style={styles.inputContainer}>
           <Text>Select a Number</Text>
           <Input
@@ -104,6 +103,7 @@ const styles = StyleSheet.create({
     width: 300,
     maxWidth: "80%",
     alignItems: "center",
+    marginTop: 30,
   },
   buttonContainer: {
     flexDirection: "row",
