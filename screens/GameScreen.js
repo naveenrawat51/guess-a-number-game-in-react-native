@@ -14,12 +14,19 @@ const generateRandomNumber = (min, max, exclude) => {
   }
 };
 
-export default function GameScreen({ userChoice }) {
+export default function GameScreen({ userChoice, onGameOver }) {
   const [currentGuess, setCurrentGuess] = useState(
     generateRandomNumber(1, 100, userChoice)
   );
+  const [rounds, setRounds] = useState(0);
   const currentLow = useRef(1);
   const currentHigh = useRef(100);
+
+  useEffect(() => {
+    if (currentGuess === userChoice) {
+      onGameOver(rounds);
+    }
+  }, [currentGuess, userChoice, onGameOver]);
 
   const nextGuessHandler = (direction) => {
     if (
@@ -43,6 +50,7 @@ export default function GameScreen({ userChoice }) {
       currentGuess
     );
     setCurrentGuess(nextNumber);
+    setRounds((currentRound) => currentRound + 1);
   };
 
   return (
