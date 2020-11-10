@@ -5,7 +5,16 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "pre-commit": "lint-staged"
+  },
+  "pre-commit": [
+    "pre-commit"
+  ],
+  "lint-staged": {
+    "*.js": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "expo": "~39.0.2",
@@ -16,7 +25,10 @@
     "react-native-web": "~0.13.12"
   },
   "devDependencies": {
-    "@babel/core": "~7.9.0"
+    "@babel/core": "~7.9.0",
+    "lint-staged": "^10.5.1",
+    "pre-commit": "^1.2.2",
+    "prettier": "^2.1.2"
   },
   "private": true
 }
