@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -9,6 +9,7 @@ import {
   Alert,
   ScrollView,
   KeyboardAvoidingView,
+  Dimensions,
 } from "react-native";
 
 import Card from "../components/Card";
@@ -22,7 +23,19 @@ export default function StartGameScreen({ onStartGame }) {
   const [enteredValue, setEnteredValue] = useState("");
   const [confirmed, setConfirmed] = useState(false);
   const [selectedNumber, setSelectedNumber] = useState("");
+  const [buttonWidth, setButtonWidth] = useState(
+    Dimensions.get("window").width / 4
+  );
 
+  useEffect(() => {
+    const updateWidth = () =>
+      setButtonWidth(Dimensions.get("window").width / 4);
+    Dimensions.addEventListener("change", updateWidth);
+
+    return () => {
+      Dimensions.removeEventListener("change", updateWidth);
+    };
+  });
   const inputNumberHandler = (inputText) => {
     setEnteredValue(inputText.replace(/[^0-9]/g, ""));
   };
@@ -74,14 +87,14 @@ export default function StartGameScreen({ onStartGame }) {
                 onChangeText={inputNumberHandler}
               />
               <View style={styles.buttonContainer}>
-                <View style={styles.btn}>
+                <View style={{ width: buttonWidth }}>
                   <Button
                     title="Reset"
                     color={Colors.accent}
                     onPress={resetInputHandler}
                   />
                 </View>
-                <View style={styles.btn}>
+                <View style={{ width: buttonWidth }}>
                   <Button
                     title="Confirm"
                     color={Colors.primary}
@@ -110,7 +123,7 @@ const styles = StyleSheet.create({
     fontFamily: "open-sans-bold",
   },
   inputContainer: {
-    width: 300,
+    width: "80%",
     maxWidth: "80%",
     alignItems: "center",
     marginTop: 30,
@@ -120,9 +133,6 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "space-between",
     paddingHorizontal: 15,
-  },
-  btn: {
-    width: 100,
   },
   input: {
     width: 70,
